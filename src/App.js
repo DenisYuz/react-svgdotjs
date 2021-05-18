@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { ReactSvg } from "./components/ReactSvg";
+import demoImage from "./assets/Landscape-Photography-steps.jpg";
+import droneVideo from "./assets//DJI Drone Sample Video.mp4";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <video
+        controls
+        autoplay
+        style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          width: "100vw",
+        }}
+      >
+        <source src={droneVideo} type="video/mp4" />
+      </video>
+      <ReactSvg
+        style={{ position: "absolute", top: "0", left: "0" }}
+        width="100vw"
+        height="100vh"
+        fill="#AA331E60"
+      ></ReactSvg>
     </div>
   );
 }
