@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { SvgAnnotations } from "./SvgAnnotations";
 import droneVideo from "../assets//DJI Drone Sample Video.mp4";
 import { useResizeDetector } from "react-resize-detector";
 import { SVG } from "@svgdotjs/svg.js";
+import { RTCVideo } from "./Video";
 
 let svgAnnotations = null;
 window.svgAnnotations = svgAnnotations;
@@ -13,7 +13,7 @@ export default function VideoWithAnnotations() {
   const [videoMetaData, setVideoMetaData] = React.useState(null);
 
   const onResize = useCallback((width, height) => {
-    console.log(`width: ${width}; height: ${height}`);
+    console.log(`videoDivWidth: ${width}; videoDivHeight: ${height}`);
     svgAnnotations?.size(width, height);
   }, []);
 
@@ -58,38 +58,23 @@ export default function VideoWithAnnotations() {
     }
   }, [videoMetaData]);
 
-  useEffect(() => {}, []);
+  function onLoadedVideoMetaData(e) {
+    setVideoMetaData({
+      videoHeight: e.target.videoHeight,
+      videoWidth: e.target.videoWidth,
+      duration: e.target.duration,
+    });
+  }
 
   return (
     <div>
-      <video
-        ref={videoDivRef}
-        style={{
-          position: "absolute",
-          left: "0",
-          top: "0",
-          minWidth: "100%",
-          minHeight: "100%",
-          width: "auto",
-          height: "auto",
-          zIndex: "1",
-          backgroundSize: "cover",
-          overflow: "hidden",
-          border: "3px solid green",
-        }}
-        controls
-        autoPlay
-        preload={"auto"}
-        onLoadedMetadata={(e) => {
-          setVideoMetaData({
-            videoHeight: e.target.videoHeight,
-            videoWidth: e.target.videoWidth,
-            duration: e.target.duration,
-          });
-        }}
-      >
-        <source src={droneVideo} type="video/mp4" />
-      </video>
+      <div>
+        <RTCVideo
+          ref={videoDivRef}
+          src={droneVideo}
+          onLoadedVideoMetaData={onLoadedVideoMetaData}
+        />
+      </div>
       <div
         ref={svgDivRef}
         style={{
