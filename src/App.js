@@ -1,31 +1,17 @@
-import logo from "./logo.svg";
-import { ReactSvg } from "./components/ReactSvg";
-import demoImage from "./assets/Landscape-Photography-steps.jpg";
-import droneVideo from "./assets//DJI Drone Sample Video.mp4";
+import { makeStyles } from "@material-ui/core/styles";
+import VideoWithAnnotations from "./components/VideoWithAnnotations";
+const useStyles = makeStyles({
+  main: {
+    position: "absolute",
+    width: "100%",
+    border: "20px solid green",
+  },
+});
 
 function App() {
-  return (
-    <div>
-      <video
-        controls
-        autoplay
-        style={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          width: "100vw",
-        }}
-      >
-        <source src={droneVideo} type="video/mp4" />
-      </video>
-      <ReactSvg
-        style={{ position: "absolute", top: "0", left: "0" }}
-        width="100vw"
-        height="100vh"
-        fill="#AA331E60"
-      ></ReactSvg>
-    </div>
-  );
+  const classes = useStyles();
+
+  return <VideoWithAnnotations style={{ border: "2px solid blue" }} />;
 }
 
 export default App;
