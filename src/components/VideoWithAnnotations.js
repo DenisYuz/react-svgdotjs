@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import droneVideo from "../assets//DJI Drone Sample Video.mp4";
 import { useResizeDetector } from "react-resize-detector";
 import { SVG } from "@svgdotjs/svg.js";
-import { RTCVideo } from "./Video";
+import { RTCVideo } from "./RTCVideo";
 
 let svgAnnotations = null;
 window.svgAnnotations = svgAnnotations;
